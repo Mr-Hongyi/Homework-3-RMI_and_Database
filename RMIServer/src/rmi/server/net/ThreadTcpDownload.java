@@ -35,22 +35,28 @@ public void run() {
         String publicFLG = getCTX(userFileName,"<",":");
         String readFLG = getCTX(userFileName,":",">");
 
-        ServerSocket sSocket=new ServerSocket(10006);
-        Socket s= sSocket.accept();
-        if (publicFLG.equals("private")){
+        ServerSocket sSocket=new ServerSocket(10006);//create a ServerSocket object running on port 10006
+        Socket s= sSocket.accept();//accept all the connection
+        if (publicFLG.equals("private"))
+        //if the file type is private, get the path of private directory
+        {
             folderPath = RMIServer.FILE_STORAGE_PATH + userName+"/";
         }
-        else if (publicFLG.equals("public")&&readFLG.equals("all")){
+        else if (publicFLG.equals("public")&&readFLG.equals("all"))
+        //if the file type is public with all authentication, get the path of 
+        //public file with all authentication directory
+        {
             folderPath = RMIServer.FILE_PUBLIC_ALL;
         }
-        else if(publicFLG.equals("public")&&readFLG.equals("read")){
+        else if(publicFLG.equals("public")&&readFLG.equals("read"))
+        //if the file type is public with all authentication, get the path of 
+        //read only public file directory
+        {
             folderPath = RMIServer.FILE_PUBLIC_READ;
         }
-        File file = new File(folderPath+fileName);
-
+        File file = new File(folderPath+fileName);//create a file object by the file path
+        //transmit the file in stream
         FileInputStream fis = new FileInputStream(file);
-
-
         OutputStream out = s.getOutputStream();
 
         byte[] buf = new byte[2048];

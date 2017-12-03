@@ -4,6 +4,11 @@ package rmi.common;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/*
+Define the remote interface and declare the method that will be used on the 
+client side
+*/
+
 public interface RMIInterface extends Remote{ 
 
 String loginSystem(String name)throws RemoteException; 

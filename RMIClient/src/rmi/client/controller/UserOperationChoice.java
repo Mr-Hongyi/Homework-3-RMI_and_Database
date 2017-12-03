@@ -1,4 +1,3 @@
-
 package rmi.client.controller;
 
 import rmi.client.model.UserDelete;
@@ -12,16 +11,15 @@ import static rmi.client.startup.RMIClient.URL;
 import rmi.client.view.cmdLine;
 import rmi.common.RMIInterface;
 
-/**
- *
- * @author harry
- */
 public class UserOperationChoice {
     
     public static boolean operationJudge() throws Exception{
         boolean breakFLG = false;
         RMIInterface userOperation=(RMIInterface)Naming.lookup(URL); 
         String userAttempt = cmdLine.operationJudgeCMD();
+        //The user's choice will be encapsulted into "(the number of service@username#"
+        //and sent to the server to extract the message and deal with the request. 
+        //Then the server will send the result back.
         switch (userAttempt)
        {
             case "0" :{

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rmi.server.model;
 
 import java.sql.Connection;
@@ -11,10 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import rmi.server.controller.SystemInitial;
 import rmi.server.net.ThreadTcpDownload;
-/**
- *
- * @author harry
- */
+
 public class FileDownload {
     public static String downloadInitial(String userName){
         String result = null;
@@ -27,28 +19,36 @@ public class FileDownload {
         String sql = "select * from UserInfo";
         PreparedStatement pstmt;
         try {
-        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+        pstmt = (PreparedStatement)conn.prepareStatement(sql);//create a PreparedStatement object to select data from UserInfo
         ResultSet rs = pstmt.executeQuery();
 
-        while (rs.next())
+        while (rs.next())//if the ResultSet has data
+        {
+
+            if(rs.getString(1).equals(userName))
+            //if the first column of the ResultSet is the same as the userName, 
+            //return all the personal files' name and encapsulate the file names
             {
-
-                if(rs.getString(1).equals(userName))
-                {
-                    personalFile = "<Your personal files: [" + rs.getString(3)+"]>";
-                }
-
+                personalFile = "<Your personal files: [" + rs.getString(3)+"]>";
             }
+
+        }
         rs = pstmt.executeQuery();
-        while (rs.next()){
+        while (rs.next())//if the ResultSet has data
+        {
             if(rs.getString(1).equals("publicallpermission"))
+            //if the first column of the ResultSet is the same as publicallpermission, 
+            //return all public files' name and encapsulate the file names
             {
                 publicAll ="{Public files(All Permission): [" + rs.getString(3)+"]}";
             }
         }
         rs = pstmt.executeQuery();
-        while (rs.next()){
+        while (rs.next())
+        {
             if(rs.getString(1).equals("publicreadonly"))
+            //if the first column of the ResultSet is the same as publicreadonly, 
+            //return all read only files' name and encapsulate the file names
             {
                 publicRead ="!Public files(Read Only): [" + rs.getString(3)+"]?";
             }

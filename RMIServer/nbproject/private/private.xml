@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/controller/SystemInitial.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/DatabaseFunction.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/controller/ServiceImpl.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/FileList.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/FileDownload.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/LoginChoice.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/net/ThreadTcpUpload.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/UserInfo.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/FileDelete.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/FileUpload.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIServer/src/rmi/server/model/FileUpdate.java</file>
+        </group>
     </open-files>
 </project-private>

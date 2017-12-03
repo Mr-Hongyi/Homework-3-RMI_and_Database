@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rmi.client.net;
 
 import java.io.File;
@@ -11,14 +6,17 @@ import java.io.InputStream;
 import java.net.Socket;
 import rmi.client.startup.RMIClient;
 import rmi.client.view.cmdLine;
-/**
- *
- * @author harry
- */
+
 public class DownloadTCP {
        
 public static void userTCPDownload(String fileName) throws Exception{
-    
+/*
+This function is to start a socket to download the file. The storage path is chosen
+by the user. The function will first check whether the path exists. If the path exists,
+then start a socket to download the file. The socket is running on port 10006. 
+The file will be transmitted in stream.
+After the transmission complete, the socket and the fileoutputstream will be closed.   
+*/       
     String userFilePath = cmdLine.enterStoragePath();
     Socket s = new Socket(RMIClient.SERVER_IP,10006);
     File file = new File(userFilePath+"/"+fileName);

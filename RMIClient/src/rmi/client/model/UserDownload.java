@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rmi.client.model;
 
 import java.rmi.Naming;
@@ -11,12 +6,17 @@ import rmi.client.startup.RMIClient;
 import static rmi.client.startup.RMIClient.URL;
 import rmi.client.view.cmdLine;
 import rmi.common.RMIInterface;
-/**
- *
- * @author harry
- */
+
 public class UserDownload {
     public static void userDownloadProcess(String result) throws Exception{
+        /*
+        Since the user can download three types of the file, which are private 
+        file that belongs to the client himself, public file that can be accessed 
+        by all clients and public file that can only be read.
+        The name of these three kinds of files will be encapsulted into different
+        punctuation. After receiving the result, the client firstly extract the file
+        name by the punctuation and show all the file name to the user.
+        */
         String personalFile =RMIClient.getCTX(result, "<", ">");
         String publicAll = RMIClient.getCTX(result, "{", "}");
         String publicRead =RMIClient.getCTX(result, "!", "?");
@@ -29,21 +29,30 @@ public class UserDownload {
         while(true){
             fileName = cmdLine.getFileName();
 
+            //The user can quit the process anytime, so if the user enters Quit or quit, 
+            //then exit the download process.
             if(fileName.equals("Quit")||fileName.equals("quit")){
                 break;
             }
+            //If the file is a personal file, then start a socket to download the file from the private
+            //document in the server.
             else if (personalFile.contains(fileName)){
                 userOperation.downloadProcess("@"+RMIClient.USER_NAME+"#"+fileName+")"+"<private:all>");
                 DownloadTCP.userTCPDownload(fileName);
                 cmdLine.println("File download success");
                 break;
             }
+            //If the file is a public file with all authentication, then start a 
+            //socket to download the file from the public file with all authentication 
+            //document in the server.
             else if (publicAll.contains(fileName)){
                 userOperation.downloadProcess("@"+RMIClient.USER_NAME+"#"+fileName+")"+"<public:all>");
                 DownloadTCP.userTCPDownload(fileName);
                 cmdLine.println("File download success");
                 break;
             }
+            //If the file is a read only file, then start a socket to download the file from the public
+            //file with read only authentication document in the server.
             else if (publicRead.contains(fileName)){
                 userOperation.downloadProcess("@"+RMIClient.USER_NAME+"#"+fileName+")"+"<public:read>");
                 DownloadTCP.userTCPDownload(fileName);

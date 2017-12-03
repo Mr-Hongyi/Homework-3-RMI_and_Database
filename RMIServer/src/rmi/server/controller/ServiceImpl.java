@@ -1,4 +1,3 @@
-
 package rmi.server.controller;
 
 import java.rmi.RemoteException; 
@@ -38,15 +37,18 @@ public String loginSystem(String userInput) throws RemoteException {
             PreparedStatement pstmt;
         
             pstmt = (PreparedStatement)conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();//execute query to search whether the database has stored user information
             int rowCount = 0;  
-            while(rs.next()) {  
+            while(rs.next()) //if the pointer can be moved to the next line, which means the database has stored user information, return true
+            {  
                 rowCount++;  
             }
-            if(rowCount<1){
+            if(rowCount<1)//if rowCount is smaller than 1, which means the database has stored no information, then ask the client to create an account
+            {
                 returnWord = "No user in the Database. Please create an account";
                 break;
             }
+            //otherwise, call the function userLogin to login to the system
             returnWord = LoginChoice.userLogin(userInput);
             break;
             } catch (SQLException e) {
@@ -54,6 +56,7 @@ public String loginSystem(String userInput) throws RemoteException {
         }
         }
         case "2" :{
+            //call function userRegister to add a new user information to the database
             returnWord = LoginChoice.userRegister(userInput);
             break;  
         }
@@ -67,6 +70,8 @@ public String loginSystem(String userInput) throws RemoteException {
 @Override 
 public String operationSystem(String userOperation) throws RemoteException { 
     String returnWord = null;
+    //Since the datagram from the user is encapsulated like "(the number of service@username#",
+    //first the server extracts the userChoice and username by the punctuations.
     String userChoice = getCTX(userOperation,"(","@");
     String userName = getCTX(userOperation,"@","#");
     switch (userChoice)
@@ -108,7 +113,7 @@ public String operationSystem(String userOperation) throws RemoteException {
 public void uploadProcess(String userFileName) throws RemoteException{
     
     try {
-        FileUpload.tcpUpload(userFileName);
+        FileUpload.tcpUpload(userFileName); //start a socket by calling the function tcpUpload to receive the file
     } catch (Exception ex) {
         Logger.getLogger(ServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -119,7 +124,7 @@ public void uploadProcess(String userFileName) throws RemoteException{
 public void downloadProcess(String userFileName) throws RemoteException{
     
     try {
-        FileDownload.tcpDownload(userFileName);
+        FileDownload.tcpDownload(userFileName); //start a socket by calling the function tcpDownload to transfer the file to the client
     } catch (Exception ex) {
         Logger.getLogger(ServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -130,7 +135,7 @@ public void downloadProcess(String userFileName) throws RemoteException{
 public void updateProcess(String userFileName) throws RemoteException{
     
     try {
-        FileUpdate.tcpUpdate(userFileName);
+        FileUpdate.tcpUpdate(userFileName); //start a socket by calling the function tcpUpdate to receive the updated file
     } catch (Exception ex) {
         Logger.getLogger(ServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -139,8 +144,9 @@ public void updateProcess(String userFileName) throws RemoteException{
 
 @Override 
 public String deleteProcess(String userfileName) throws RemoteException {
-       String result = FileDelete.fileDelete(userfileName);
+    String result = FileDelete.fileDelete(userfileName);
         return result;
+   
 } 
 
 public static String getCTX(String originalCTX,String firstSplit,String secondSplit){

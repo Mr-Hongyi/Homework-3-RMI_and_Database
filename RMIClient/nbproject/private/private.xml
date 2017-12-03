@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/model/UserUnregister.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/controller/UserInitial.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/startup/RMIClient.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/common/RMIInterface.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/model/UserUpdate.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/model/UserDownload.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/net/UploadTCP.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/model/UserChoice.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/controller/UserOperationChoice.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/controller/FirstChoiceJudge.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/net/UpdateTCP.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/view/cmdLine.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/model/UserUpload.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/net/DownloadTCP.java</file>
+            <file>file:/Users/harry/Desktop/Task3-Annotated/RMIClient/src/rmi/client/model/UserDelete.java</file>
+        </group>
     </open-files>
 </project-private>

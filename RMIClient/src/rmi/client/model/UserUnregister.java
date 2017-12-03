@@ -23,6 +23,7 @@ public class UserUnregister {
         String userConfirm = cmdLine.userUnregisterCMD();
         while (true){
             if (userConfirm.equals("Y")||userConfirm.equals("N"))
+            //if the user enters neither Y nor N, ask the user to enter again 
                     {
                         break;
                     }
@@ -30,13 +31,18 @@ public class UserUnregister {
             userConfirm = cmdLine.unregisterConf();
         }
         switch (userConfirm){
-            case "Y":{
+            case "Y":
+            //if the user enters "Y", call the method operation system to delete 
+            //the files and the document of the user and exit the system.
+            {
                 result = userOperation.operationSystem("(5@"+RMIClient.USER_NAME+"#");
                 cmdLine.println(result);
                 System.exit(0);
                 break;
             }
-            case "N" :{
+            case "N" :
+            //if the user enters "N", start the cycle again
+            {
                 result = "Please choose new operation.";
                 break;
             }

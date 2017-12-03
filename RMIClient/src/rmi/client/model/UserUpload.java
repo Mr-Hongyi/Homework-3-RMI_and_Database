@@ -1,4 +1,3 @@
-
 package rmi.client.model;
 import java.io.File;
 import java.rmi.Naming;
@@ -39,6 +38,8 @@ public static void userUploadProcess(String result) throws Exception{
             cmdLine.println("\nYour file is \"Public(Read only)\" or \"Public(All permission)\" or \"Private\"! Please type: ");
 
             while(true){
+                //choose the permission of the file, the choice will be encapsulted into "@username#filename)<permission>"
+                //and the server will extract the choice and permission by the punctuation
                 String publicFLG =cmdLine.fileFeatureSele();
                 if (publicFLG.equals("1")){
                     userOperation.uploadProcess("@"+RMIClient.USER_NAME+"#"+fileName+")"+"<public:read>");
@@ -59,7 +60,7 @@ public static void userUploadProcess(String result) throws Exception{
                 }
             }
 
-            UploadTCP.userTCPUpload(userPath);
+            UploadTCP.userTCPUpload(userPath); //start a socket to transmit the file
             cmdLine.println("File upload success");
             break;
         }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rmi.server.net;
 
 import java.io.File;
@@ -25,10 +20,6 @@ import rmi.server.model.UserInfo;
 
 import rmi.server.startup.RMIServer;
 
-/**
- *
- * @author harry
- */
 public class ThreadTcpUpdate extends Thread implements Runnable{
     private String userFileName;
     public ThreadTcpUpdate(String userFileName){
@@ -46,17 +37,23 @@ public void run() {
         String publicFLG = getCTX(userFileName,"<",":");
         String readFLG = getCTX(userFileName,":",">");
 
-        ServerSocket sSocket=new ServerSocket(10006);
-        Socket s= sSocket.accept();
-        if (publicFLG.equals("private")){
+        ServerSocket sSocket=new ServerSocket(10006);//create a ServerSocket object running on port 10006
+        Socket s= sSocket.accept();//accept all the connection
+        if (publicFLG.equals("private"))
+        //if the file type is private, get the path of private directory
+        {
             folderPath = RMIServer.FILE_STORAGE_PATH + userName+"/";
         }
-        else if (publicFLG.equals("public")&&readFLG.equals("all")){
+        else if (publicFLG.equals("public")&&readFLG.equals("all"))
+        //if the file type is public with all authentication, get the path of 
+        //public file with all authentication directory
+        {
             folderPath = RMIServer.FILE_PUBLIC_ALL;
         }
-        String fileSize1 = RMIServer.getFileSize(folderPath+fileName);
+        String fileSize1 = RMIServer.getFileSize(folderPath+fileName);//get the size of the file
         File file = new File(folderPath+fileName);
-
+        
+        //transmit the file in stream
         InputStream in = s.getInputStream();
         FileOutputStream fos = new FileOutputStream(file);
         byte[] buffile = new byte[2048];
@@ -68,17 +65,21 @@ public void run() {
             fos.write(buffile, 0, len);
         }
         
+        //update the information in the database
         String fileSize2 = RMIServer.getFileSize(folderPath+fileName);
         Connection conn = SystemInitial.getConn();
             String sql = "select * from UserInfo";
             PreparedStatement pstmt;
             
                 try {
-                    pstmt = (PreparedStatement)conn.prepareStatement(sql);
+                    pstmt = (PreparedStatement)conn.prepareStatement(sql);//create a PreparedStatement object to select data from UserInfo
                     
-                    if (publicFLG.equals("private")){
+                    if (publicFLG.equals("private"))
+                    //if file type is private, update the file in the personalFile 
+                    //column related to specific user
+                    {
                         ResultSet rs = pstmt.executeQuery();
-                        while (rs.next())
+                        while (rs.next())//if the ResultSet has data
                         {
                             
                             if(rs.getString(1).equals(userName))
@@ -90,7 +91,10 @@ public void run() {
                         personalFile = personalFile.replace(fileName+fileSize1+" ",fileName+fileSize2+" ");
                         DatabaseFunction.dataUpdate(new UserInfo(userName,"",personalFile));
                     }
-                    else if (publicFLG.equals("public")&&readFLG.equals("all")){                    
+                    else if (publicFLG.equals("public")&&readFLG.equals("all"))
+                    //if file type is private, update the file in the publicfile
+                    //column related to publicllpermission
+                    {                    
                         ResultSet rs = pstmt.executeQuery();
                         while (rs.next())
                         {
